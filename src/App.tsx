@@ -12,7 +12,7 @@ const ViewWrapper = styled.main`
   height: 95vh;
 `;
 
-export default () => {
+const App =  () => {
   const { onCitySubmit, response, isError, image } = usePostCity();
   return (
     <>
@@ -24,3 +24,5 @@ export default () => {
     </>
   );
 };
+
+export default App;
