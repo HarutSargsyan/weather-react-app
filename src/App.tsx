@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import SearchBar from "./components/SearchBar";
+import Result from "./components/Result";
+import styled from "styled-components";
+import Footer from "./components/Footer";
+import usePostCity from "./hooks/usePostCity";
 
-function App() {
+const ViewWrapper = styled.main`
+  padding: 0 40px;
+  background: linear-gradient(to right, #56ab2f, #a8e063);
+  clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
+  height: 95vh;
+`;
+
+export default () => {
+  const { onCitySubmit, response, isError, image } = usePostCity();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <ViewWrapper>
+        <SearchBar isError={isError} onTermSubmit={onCitySubmit} />
+        <Result result={response} imageUrl={image} />
+      </ViewWrapper>
+      <Footer />
+    </>
   );
-}
-
-export default App;
+};
