@@ -6,10 +6,10 @@ import Footer from "./components/Footer";
 import usePostCity from "./hooks/usePostCity";
 
 const ViewWrapper = styled.main`
-  padding: 0 40px;
+  padding: 20px 40px;
   background: linear-gradient(to right, #56ab2f, #a8e063);
   clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
-  height: 95vh;
+  height: 90vh;
 `;
 
 const App =  () => {

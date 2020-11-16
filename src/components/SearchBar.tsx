@@ -4,10 +4,9 @@ import { ReactComponent as Logo } from "../icons/cloudy.svg";
 import { ReactComponent as WarnIcon } from "../icons/warning.svg";
 
 const SearchBarWrapper = styled.div`
-  padding: 30px;
   display: flex;
   flex-direction: column;
-  margin: auto;
+  margin: 0 auto 20px auto;
 `;
 
 const NotFoundTransition = keyframes`
@@ -73,7 +72,7 @@ const SearchBar = ({
   return (
     <SearchBarWrapper>
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <div style={{ width: "50px", height: "50px", marginRight: "10px" }}>
+        <div style={{ width: "3.7rem", height: "3.7rem", marginRight: "10px" }}>
           <Logo />
         </div>
         <Text>Weather Search</Text>
