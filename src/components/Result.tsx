@@ -40,7 +40,7 @@ interface Props<T> {
   imageUrl: string;
 }
 
-export default ({ result, imageUrl }: Props<View>) => {
+const Result = ({ result, imageUrl }: Props<View>) => {
   const results = useResultFields(result);
   if (!result)
     return (
@@ -70,3 +70,5 @@ export default ({ result, imageUrl }: Props<View>) => {
     </Card>
   );
 };
+
+export default Result;

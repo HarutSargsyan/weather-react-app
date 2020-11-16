@@ -4,7 +4,7 @@ import imageAPI from "../api/image";
 import { filterUnfitImages, Result } from "../util/index";
 import { AxiosResponse } from "axios";
 
-export default (): Result => {
+const usePostcity = (): Result => {
   const [response, setResponse] = useState();
   const [image, setImage] = useState("");
   const [isError, setIsError] = useState(false);
@@ -44,3 +44,5 @@ export default (): Result => {
 
   return { onCitySubmit, response, isError, image };
 };
+
+export default usePostcity;

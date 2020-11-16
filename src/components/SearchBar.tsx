@@ -55,7 +55,7 @@ const ErrorWrapper = styled.div`
   animation: 0.3s ${NotFoundTransition} ease-out;
 `;
 
-export default ({
+const SearchBar = ({
   isError,
   onTermSubmit,
 }: {
@@ -112,3 +112,5 @@ export default ({
     </SearchBarWrapper>
   );
 };
+
+export default SearchBar;
