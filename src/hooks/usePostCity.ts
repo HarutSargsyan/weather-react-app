@@ -20,26 +20,25 @@ const usePostcity = (): Result => {
       .then((res: AxiosResponse) => {
         setResponse(res.data);
       })
-      .then(() => {
-        imageAPI
-          .get("/", {
-            params: {
-              q: cityName,
-              image_type: "photo",
-            },
-          })
-          .then((res: AxiosResponse) => {
-            const image = filterUnfitImages(res.data.hits);
-            image && setImage(image?.largeImageURL);
-          })
-
-          .catch((err) => {
-            console.error(err);
-          });
-      })
       .catch(() => {
         setIsError(true);
-      }); 
+      });
+
+    imageAPI
+      .get("/", {
+        params: {
+          q: cityName,
+          image_type: "photo",
+        },
+      })
+      .then((res: AxiosResponse) => {
+        const image = filterUnfitImages(res.data.hits);
+        image && setImage(image?.largeImageURL);
+      })
+
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
   return { onCitySubmit, response, isError, image };
