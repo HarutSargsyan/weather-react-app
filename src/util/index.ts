@@ -2,7 +2,7 @@ export const KelvinToCelsius = (kelvin: number) => Math.ceil(kelvin - 272.15);
 export const filterUnfitImages = (images: Image[]) =>
   images.find((img: any) => img.imageWidth - img.imageHeight > 0);
 export interface View {
-  name: "string";
+  name: string;
   wind: {
     speed: number;
   };

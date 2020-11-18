@@ -4,6 +4,7 @@ import Result from "./components/Result";
 import styled from "styled-components";
 import Footer from "./components/Footer";
 import usePostCity from "./hooks/usePostCity";
+import useGetDefaultWeather from "./hooks/useDefaultWeather";
 
 const ViewWrapper = styled.main`
   padding: 20px 40px;
@@ -12,13 +13,17 @@ const ViewWrapper = styled.main`
   height: 90vh;
 `;
 
-const App =  () => {
+const App = () => {
   const { onCitySubmit, response, isError, image } = usePostCity();
+  const { defaultImage, defaultResponse } = useGetDefaultWeather();
   return (
     <>
       <ViewWrapper>
         <SearchBar isError={isError} onTermSubmit={onCitySubmit} />
-        <Result result={response} imageUrl={image} />
+        <Result
+          result={response ? response : defaultResponse}
+          imageUrl={image ? image : defaultImage}
+        />
       </ViewWrapper>
       <Footer />
     </>

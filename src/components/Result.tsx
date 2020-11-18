@@ -37,14 +37,16 @@ const Image = styled.img`
 
 interface Props<T> {
   result: T;
-  imageUrl: string;
+  imageUrl: string | undefined;
 }
 
 const Result = ({ result, imageUrl }: Props<View>) => {
   const results = useResultFields(result);
   if (!result)
     return (
-      <p style={{ textAlign: "center" }}> Waiting for your submission...</p>
+      <p style={{ textAlign: "center" }}>
+        Please, unable us to see your location or type your city name...
+      </p>
     );
   return (
     <Card>
