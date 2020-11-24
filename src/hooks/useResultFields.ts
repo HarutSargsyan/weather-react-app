@@ -8,19 +8,19 @@ const useResultFields = (result: View): Return[] => {
   return [
     {
       icon: Thermometer,
-      text: KelvinToCelsius(result?.main.temp),
+      text: KelvinToCelsius(result?.main?.temp),
       sign: "C",
       key: 1,
     },
     {
       icon: Wind,
-      text: result?.wind.speed,
+      text: result?.wind?.speed,
       sign: "m/s",
       key: 2,
     },
     {
       icon: Gauge,
-      text: result?.main.pressure,
+      text: result?.main?.pressure,
       sign: "pH",
       key: 3,
     },

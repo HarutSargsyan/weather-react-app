@@ -6,8 +6,8 @@ import useGetUserLocation from "./useGetUserLocation";
 import { filterUnfitImages } from "../util";
 
 const useDefaultWeather = () => {
-  const [response, setResponse] = useState();
-  const [image, setImage] = useState<string>();
+  const [defaultResponse, setDefaultResponse] = useState();
+  const [defaultImage, setDefaultImage] = useState<string>();
   const [lat, lon] = useGetUserLocation();
   useEffect(() => {
     const cancelToken = axios.CancelToken;
@@ -22,7 +22,7 @@ const useDefaultWeather = () => {
           },
         })
         .then((res: AxiosResponse) => {
-          setResponse(res.data);
+          setDefaultResponse(res.data);
           return res.data.name;
         })
         .then((name) => {
@@ -35,7 +35,7 @@ const useDefaultWeather = () => {
             })
             .then((res: AxiosResponse) => {
               const image = filterUnfitImages(res.data.hits);
-              image && setImage(image?.largeImageURL);
+              image && setDefaultImage(image?.largeImageURL);
             })
 
             .catch((err) => {
@@ -50,7 +50,7 @@ const useDefaultWeather = () => {
     };
   }, [lat, lon]);
 
-  return { defaultResponse: response, defaultImage: image };
+  return { defaultResponse, defaultImage } as const;
 };
 
 export default useDefaultWeather;
