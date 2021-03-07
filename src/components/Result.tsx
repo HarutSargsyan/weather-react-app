@@ -15,6 +15,7 @@ const ResultWrapper = styled.div`
 `;
 
 const Card = styled.div`
+  position: relative;
   width: 20rem;
   min-height: 23rem;
   background-color: white;
@@ -33,14 +34,17 @@ const Image = styled.img`
   max-width: 100%;
   max-height: 100%;
   border-radius: 6px;
+  filter: ${({ isLoading }: { isLoading: boolean }) =>
+    isLoading ? "blur(5px)" : ""};
 `;
 
 interface Props<T> {
+  isLoading: boolean;
   result: T;
   imageUrl: string | undefined;
 }
 
-const Result = ({ result, imageUrl }: Props<View>) => {
+const Result = ({ isLoading, result, imageUrl }: Props<View>) => {
   const results = useResultFields(result);
   if (!result)
     return (
@@ -50,7 +54,9 @@ const Result = ({ result, imageUrl }: Props<View>) => {
     );
   return (
     <Card>
-      <Image src={imageUrl} alt={result?.name} />
+      <div>
+        <Image isLoading={isLoading} src={imageUrl} />
+      </div>
       <div style={{ padding: "10px", marginBottom: "20px" }}>
         <h3 style={{ fontSize: "37px", marginBottom: "10px" }}>
           {result?.name}

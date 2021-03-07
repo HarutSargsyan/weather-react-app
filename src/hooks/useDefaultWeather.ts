@@ -5,7 +5,7 @@ import imageAPI from "../api/image";
 import useGetUserLocation from "./useGetUserLocation";
 import { filterUnfitImages } from "../util";
 
-const useDefaultWeather = () => {
+ export default () => {
   const [defaultResponse, setDefaultResponse] = useState();
   const [defaultImage, setDefaultImage] = useState<string>();
   const [lat, lon] = useGetUserLocation();
@@ -50,7 +50,6 @@ const useDefaultWeather = () => {
     };
   }, [lat, lon]);
 
-  return { defaultResponse, defaultImage } as const;
+  return { defaultResponse, defaultImage };
 };
 
-export default useDefaultWeather;

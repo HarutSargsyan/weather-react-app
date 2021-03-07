@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import SearchBar from "./components/SearchBar";
 import Result from "./components/Result";
 import styled from "styled-components";
@@ -13,14 +13,18 @@ const ViewWrapper = styled.main`
   height: 90vh;
 `;
 
-const App = () => {
-  const { onCitySubmit, response, isError, image } = usePostCity();
+export default () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const { onCitySubmit, response, isError, image } = usePostCity({
+    setIsLoading,
+  });
   const { defaultImage, defaultResponse } = useGetDefaultWeather();
   return (
     <>
       <ViewWrapper>
         <SearchBar isError={isError} onTermSubmit={onCitySubmit} />
         <Result
+          isLoading={isLoading}
           result={response ? response : defaultResponse}
           imageUrl={image ? image : defaultImage}
         />
@@ -29,5 +33,3 @@ const App = () => {
     </>
   );
 };
-
-export default App;

@@ -4,13 +4,19 @@ import imageAPI from "../api/image";
 import { filterUnfitImages, Result } from "../util/index";
 import { AxiosResponse } from "axios";
 
-const usePostcity = (): Result => {
+export default ({
+  setIsLoading,
+}: {
+  setIsLoading(isLoading: boolean): void;
+}): Result => {
   const [response, setResponse] = useState();
   const [image, setImage] = useState("");
   const [isError, setIsError] = useState(false);
 
   const onCitySubmit = (cityName: string): void => {
     setIsError(false);
+    setIsLoading(true);
+
     weather
       .get("/weather", {
         params: {
@@ -35,7 +41,9 @@ const usePostcity = (): Result => {
         const image = filterUnfitImages(res.data.hits);
         image && setImage(image?.largeImageURL);
       })
-
+      .then(() => {
+        setIsLoading(false);
+      })
       .catch((err) => {
         console.error(err);
       });
@@ -43,5 +51,3 @@ const usePostcity = (): Result => {
 
   return { onCitySubmit, response, isError, image };
 };
-
-export default usePostcity;

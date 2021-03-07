@@ -21,7 +21,7 @@ const NotFoundTransition = keyframes`
 const Text = styled.p`
   font-size: 2.5rem;
   color: white;
-  margin-bottom: 1rem;
+  font-family: sans-serif;
   text-align: center;
 `;
 
@@ -32,12 +32,13 @@ const Input = styled.input`
   border: transparent;
   height: 3rem;
   padding: 0 0.5rem;
+  font-size: 0.8rem;
   :focus {
     outline: none !important;
   }
 `;
 
-const Button = styled.button`
+const Button = styled.input`
   background-color: #75bdf7;
   color: white;
   outline: none;
@@ -59,7 +60,7 @@ const SearchBar = ({
   onTermSubmit,
 }: {
   isError: boolean;
-  onTermSubmit?(cityName: string): void;
+  onTermSubmit(cityName: string): void;
 }) => {
   const [cityName, setCityName] = useState<string>("");
 
@@ -71,16 +72,17 @@ const SearchBar = ({
 
   return (
     <SearchBarWrapper>
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <div style={{ width: "3.7rem", height: "3.7rem", marginRight: "10px" }}>
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", marginBottom: "20px" }}>
+        <div style={{ width: "3.5rem", height: "3.5rem", marginRight: "10px" }}>
           <Logo />
         </div>
-        <Text>Weather Search</Text>
+        <Text className="title">Weather Search</Text>
       </div>
       <div style={{ margin: "auto" }}>
         <form onSubmit={onSubmit}>
           <div style={{ display: "flex" }}>
             <Input
+              className="input"
               placeholder="Type your city name..."
               type="text"
               value={cityName}
@@ -88,7 +90,7 @@ const SearchBar = ({
                 setCityName(e.target.value);
               }}
             />
-            <Button type="submit">Submit</Button>
+            <Button type="submit" value="Submit" />
           </div>
         </form>
       </div>

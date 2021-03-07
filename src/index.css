@@ -18,7 +18,10 @@ body {
   :root{
     font-size: 14px;
   }
-  input{
+  .input{
     min-width: 60vw !important;
+  }
+  .title{
+    font-size: 2rem !important;
   }
 }

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const useGetUserLocation = () => {
+export default () => {
   const [lat, setLat] = useState<number>();
   const [lon, setLon] = useState<number>();
   useEffect(() => {
@@ -19,4 +19,3 @@ const useGetUserLocation = () => {
   return [lat, lon];
 };
 
-export default useGetUserLocation;

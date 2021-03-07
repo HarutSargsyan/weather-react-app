@@ -4,7 +4,7 @@ import { ReactComponent as Thermometer } from "../icons/thermometer.svg";
 import { ReactComponent as Wind } from "../icons/wind.svg";
 import { ReactComponent as Gauge } from "../icons/gauge.svg";
 
-const useResultFields = (result: View): Return[] => {
+export default (result: View): Return[] => {
   return [
     {
       icon: Thermometer,
@@ -26,5 +26,3 @@ const useResultFields = (result: View): Return[] => {
     },
   ];
 };
-
-export default useResultFields;
