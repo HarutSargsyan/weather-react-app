@@ -13,40 +13,36 @@ export default ({
   const [image, setImage] = useState("");
   const [isError, setIsError] = useState(false);
 
-  const onCitySubmit = (cityName: string): void => {
-    setIsError(false);
-    setIsLoading(true);
-
-    weather
-      .get("/weather", {
+  const fetchWeather = async ({ cityName }: { cityName: string }) => {
+    try {
+      const { data } = await weather.get("/weather", {
         params: {
           q: cityName,
         },
-      })
-      .then((res: AxiosResponse) => {
-        setResponse(res.data);
-      })
-      .catch(() => {
-        setIsError(true);
       });
-
-    imageAPI
-      .get("/", {
+      const {
+        data: { hits },
+      } = await imageAPI.get("/", {
         params: {
           q: cityName,
           image_type: "photo",
         },
-      })
-      .then((res: AxiosResponse) => {
-        const image = filterUnfitImages(res.data.hits);
-        image && setImage(image?.largeImageURL);
-      })
-      .then(() => {
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        console.error(err);
       });
+
+      const image = filterUnfitImages(hits);
+      image && setImage(image?.largeImageURL);
+      setResponse(data);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const onCitySubmit = (cityName: string): void => {
+    setIsError(false);
+    setIsLoading(true);
+    fetchWeather({ cityName });
   };
 
   return { onCitySubmit, response, isError, image };

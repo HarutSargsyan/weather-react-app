@@ -13,7 +13,7 @@ export default () => {
         setLon(longitude);
       });
     } else {
-      console.log("Not Available");
+      console.log("Not Available geolocation");
     }
   }, []);
   return [lat, lon];
