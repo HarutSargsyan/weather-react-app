@@ -16,6 +16,6 @@ export default () => {
       console.log("Not Available geolocation");
     }
   }, []);
-  return [lat, lon];
+  return [lat, lon, navigator];
 };
 

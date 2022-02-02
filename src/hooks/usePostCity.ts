@@ -2,7 +2,6 @@ import { useState } from "react";
 import weather from "../api/weather";
 import imageAPI from "../api/image";
 import { filterUnfitImages, Result } from "../util/index";
-import { AxiosResponse } from "axios";
 
 export default ({
   setIsLoading,
@@ -33,11 +32,13 @@ export default ({
       image && setImage(image?.largeImageURL);
       setResponse(data);
     } catch (err) {
-      console.error(err);
+      setIsError(true);
     } finally {
       setIsLoading(false);
     }
   };
+
+
 
   const onCitySubmit = (cityName: string): void => {
     setIsError(false);

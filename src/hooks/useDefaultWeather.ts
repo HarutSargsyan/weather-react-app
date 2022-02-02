@@ -42,7 +42,7 @@ export default () => {
     return () => {
       source.cancel("axios request cancelled");
     };
-  }, [lat, lon]);
+  }, [lat, lon, navigator]);
 
   return { defaultResponse, defaultImage };
 };
