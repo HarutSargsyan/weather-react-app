@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, useRef, useState } from "react";
 import styled, { keyframes } from "styled-components";
 import { ReactComponent as Logo } from "../icons/cloudy.svg";
 import { ReactComponent as WarnIcon } from "../icons/warning.svg";
@@ -64,9 +64,10 @@ const SearchBar = ({
   onTermSubmit(cityName: string): void;
 }) => {
   const [cityName, setCityName] = useState<string>("");
-
+  const inputRef = useRef<HTMLInputElement>();
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
+    inputRef.current?.blur();
     setCityName("");
     onTermSubmit && onTermSubmit(cityName);
   };
@@ -83,6 +84,7 @@ const SearchBar = ({
         <form onSubmit={onSubmit}>
           <div style={{ display: "flex" }}>
             <Input
+              ref={inputRef}
               className="input"
               placeholder="Type your city name..."
               type="text"
