@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import SearchBar from "./components/SearchBar";
 import Result from "./components/Result";
 import styled from "styled-components";
@@ -20,11 +20,10 @@ const ViewWrapper = styled.main`
 `;
 
 export default () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const { onCitySubmit, response, isError, image } = usePostCity({
-    setIsLoading,
-  });
+  const postCity = usePostCity();
+  const { onCitySubmit, response, isError, image, isLoading } = postCity();
   const { defaultImage, defaultResponse } = useGetDefaultWeather();
+
   return (
     <PageWrapper>
       <ViewWrapper>

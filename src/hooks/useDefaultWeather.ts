@@ -7,7 +7,7 @@ import { filterUnfitImages } from "../util";
 
 export default () => {
   const [defaultResponse, setDefaultResponse] = useState();
-  const [defaultImage, setDefaultImage] = useState<string>();
+  const [defaultImage, setDefaultImage] = useState<any>();
   const [lat, lon] = useGetUserLocation();
 
   const fetchData = async () => {
@@ -28,7 +28,7 @@ export default () => {
           image_type: "photo",
         },
       });
-      const image = filterUnfitImages(hits);
+      const image = await filterUnfitImages(hits);
       image && setDefaultImage(image?.largeImageURL);
     } catch (err) {
       console.error(err);
