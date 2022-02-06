@@ -69,7 +69,7 @@ const SearchBar = ({
     e.preventDefault();
     inputRef.current?.blur();
     setCityName("");
-    onTermSubmit && onTermSubmit(cityName);
+    onTermSubmit(cityName);
   };
 
   return (

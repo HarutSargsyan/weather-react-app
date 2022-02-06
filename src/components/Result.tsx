@@ -3,7 +3,7 @@ import styled from "styled-components";
 import useResultFields from "../hooks/useResultFields";
 import { View, Return } from "../util/index";
 
-const ResyultsWrepper = styled.div`
+const ResultsWrepper = styled.div`
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
@@ -25,8 +25,8 @@ const Card = styled.div`
 `;
 
 const IconWrapper = styled.div`
-  height: 30px;
-  width: 30px;
+  height: 1.7rem;
+  width: 1.7rem;
   margin-right: 5px;
 `;
 
@@ -58,23 +58,23 @@ const Result = ({ isLoading, result, imageUrl }: Props<View>) => {
         <Image isLoading={isLoading} src={imageUrl} />
       </div>
       <div style={{ padding: "10px", marginBottom: "20px" }}>
-        <h3 style={{ fontSize: "37px", marginBottom: "10px" }}>
+        <h3 style={{ fontSize: "2.5rem", marginBottom: "10px" }}>
           {result?.name}
         </h3>
         <hr />
       </div>
-      <ResyultsWrepper>
+      <ResultsWrepper>
         {results.map((result: Return) => (
           <ResultWrapper key={result.key}>
             <IconWrapper>
               <result.icon />
             </IconWrapper>
-            <p style={{ fontSize: "20px", color: "grey" }}>
+            <p style={{ fontSize: "1.3rem", color: "grey" }}>
               {result.text} {result.sign}
             </p>
           </ResultWrapper>
         ))}
-      </ResyultsWrepper>
+      </ResultsWrepper>
     </Card>
   );
 };
