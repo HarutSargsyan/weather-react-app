@@ -1,6 +1,7 @@
 import { useState } from "react";
 import weather from "../api/weather";
 import imageAPI from "../api/image";
+import noImage from "../icons/no-image.jpeg";
 import { filterUnfitImages, Result } from "../util/index";
 
 export default () => (): Result => {
@@ -17,6 +18,7 @@ export default () => (): Result => {
           q: cityName,
         },
       });
+
       const {
         data: { hits },
       } = await imageAPI.get("/", {
@@ -26,6 +28,7 @@ export default () => (): Result => {
         },
       });
       const image = await filterUnfitImages(hits);
+      if(!image) setImage(noImage);
       image && setImage(image?.largeImageURL);
       setResponse(data);
     } catch (err) {
