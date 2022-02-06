@@ -3,12 +3,6 @@ import weather from "../api/weather";
 import imageAPI from "../api/image";
 import { filterUnfitImages, Result } from "../util/index";
 
-interface Image {
-  imageWidth: string;
-  imageHeight: string;
-  largeImageURL: string;
-}
-
 export default () => (): Result => {
   const [response, setResponse] = useState();
   const [isLoading, setIsLoading] = useState(false);
