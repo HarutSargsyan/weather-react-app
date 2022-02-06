@@ -33,16 +33,18 @@ export default () => (): Result => {
       });
       const image = await filterUnfitImages(hits);
       image && setImage(image?.largeImageURL);
-
       setResponse(data);
     } catch (err) {
       setIsError(true);
     } finally {
-      setIsLoading(false);
+      setTimeout(() => {
+        setIsLoading(false);
+      },500)
+      // delay to setup the image
     }
   };
 
-  const onCitySubmit = (cityName: string): void => {
+  const onCitySubmit = async (cityName: string) => {
     setIsError(false);
     fetchWeather({ cityName });
   };
