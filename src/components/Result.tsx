@@ -64,13 +64,13 @@ const Result = ({ isLoading, result, imageUrl }: Props<View>) => {
         <hr />
       </div>
       <ResultsWrepper>
-        {results.map((result: Return) => (
-          <ResultWrapper key={result.key}>
+        {results.map(({Icon, sign, key, text}: Return) => (
+          <ResultWrapper key={key}>
             <IconWrapper>
-              <result.icon />
+              <Icon />
             </IconWrapper>
             <p style={{ fontSize: "1.3rem", color: "grey" }}>
-              {result.text} {result.sign}
+              {text} {sign}
             </p>
           </ResultWrapper>
         ))}

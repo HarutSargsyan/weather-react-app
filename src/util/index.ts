@@ -17,7 +17,7 @@ export interface View {
 }
 
 export interface Return {
-  icon: any;
+  Icon: any;
   text: number;
   sign: string;
   key: number;

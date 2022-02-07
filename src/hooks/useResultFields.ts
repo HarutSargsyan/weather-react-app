@@ -7,19 +7,19 @@ import { ReactComponent as Gauge } from "../icons/gauge.svg";
 export default (result: View): Return[] => {
   return [
     {
-      icon: Thermometer,
+      Icon: Thermometer,
       text: KelvinToCelsius(result?.main?.temp),
       sign: "C",
       key: 1,
     },
     {
-      icon: Wind,
+      Icon: Wind,
       text: result?.wind?.speed,
       sign: "m/s",
       key: 2,
     },
     {
-      icon: Gauge,
+      Icon: Gauge,
       text: result?.main?.pressure,
       sign: "pH",
       key: 3,
