@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import useResultFields from "../hooks/useResultFields";
+import useDetailFields from "../hooks/useDetailFields";
 import { View, Return } from "../util/index";
+
 
 const ResultsWrepper = styled.div`
   display: flex;
@@ -45,7 +46,7 @@ interface Props<T> {
 }
 
 const Result = ({ isLoading, result, imageUrl }: Props<View>) => {
-  const results = useResultFields(result);
+  const details = useDetailFields(result);
   if (!result)
     return (
       <p style={{ textAlign: "center" }}>
@@ -64,7 +65,7 @@ const Result = ({ isLoading, result, imageUrl }: Props<View>) => {
         <hr />
       </div>
       <ResultsWrepper>
-        {results.map(({Icon, sign, key, text}: Return) => (
+        {details.map(({Icon, sign, key, text}: Return) => (
           <ResultWrapper key={key}>
             <IconWrapper>
               <Icon />
