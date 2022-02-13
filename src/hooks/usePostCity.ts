@@ -30,6 +30,7 @@ export default () => (): Result => {
       const image = await filterUnfitImages(hits);
       if(!image) setImage(noImage);
       image && setImage(image?.largeImageURL);
+      
       setResponse(data);
     } catch (err) {
       setIsError(true);

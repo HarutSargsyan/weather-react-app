@@ -1,7 +1,8 @@
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 import { useEffect, useState } from "react";
 import weather from "../api/weather";
 import imageAPI from "../api/image";
+import noImage from "../icons/no-image.jpeg";
 import useGetUserLocation from "./useGetUserLocation";
 import { filterUnfitImages } from "../util";
 
@@ -29,6 +30,7 @@ export default () => {
         },
       });
       const image = await filterUnfitImages(hits);
+      if(!image) setDefaultImage(noImage);
       image && setDefaultImage(image?.largeImageURL);
     } catch (err) {
       console.error(err);

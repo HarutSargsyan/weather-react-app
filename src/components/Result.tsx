@@ -32,6 +32,7 @@ const IconWrapper = styled.div`
 `;
 
 const Image = styled.img`
+  min-width: 20rem;
   max-width: 100%;
   max-height: 100%;
   border-radius: 6px;
