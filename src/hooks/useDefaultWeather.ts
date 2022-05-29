@@ -20,6 +20,7 @@ export default () => {
         },
       });
       setDefaultResponse(data);
+
       const { name } = data;
       const {
         data: { hits },
@@ -29,7 +30,7 @@ export default () => {
           image_type: "photo",
         },
       });
-      const image = await filterUnfitImages(hits);
+      const image = filterUnfitImages(hits);
       if(!image) setDefaultImage(noImage);
       image && setDefaultImage(image?.largeImageURL);
     } catch (err) {

@@ -4,6 +4,28 @@ import imageAPI from "../api/image";
 import noImage from "../icons/no-image.jpeg";
 import { filterUnfitImages, Result } from "../util/index";
 
+const fecthWeatherData = async (cityName: string) => {
+  const { data } = await weather.get("/weather", {
+    params: {
+      q: cityName,
+    },
+  });
+  return data;
+};
+
+const fetchImage = async (cityName: string) => {
+  const {
+    data: { hits },
+  } = await imageAPI.get("/", {
+    params: {
+      q: cityName,
+      image_type: "photo",
+    },
+  });
+  const image = filterUnfitImages(hits);
+  return image;
+};
+
 export default () => (): Result => {
   const [response, setResponse] = useState();
   const [isLoading, setIsLoading] = useState(false);
@@ -13,32 +35,18 @@ export default () => (): Result => {
   const fetchWeather = async ({ cityName }: { cityName: string }) => {
     setIsLoading(true);
     try {
-      const { data } = await weather.get("/weather", {
-        params: {
-          q: cityName,
-        },
-      });
+      const [data, image] = await Promise.all([
+        fecthWeatherData(cityName),
+        fetchImage(cityName),
+      ]);
 
-      const {
-        data: { hits },
-      } = await imageAPI.get("/", {
-        params: {
-          q: cityName,
-          image_type: "photo",
-        },
-      });
-      const image = await filterUnfitImages(hits);
-      if(!image) setImage(noImage);
+      if (!image) setImage(noImage);
       image && setImage(image?.largeImageURL);
-      
       setResponse(data);
     } catch (err) {
       setIsError(true);
     } finally {
-      setTimeout(() => {
-        setIsLoading(false);
-      },500)
-      // delay to setup the image
+      setIsLoading(false);
     }
   };
 
