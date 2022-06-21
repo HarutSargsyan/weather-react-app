@@ -9,7 +9,7 @@ const Footer = () => (
       height: " 2.5rem ",
     }}
   >
-    <h4 style={{ textAlign: "center" }}> &copy; Harut Sargsyan | 2020</h4>
+    <h4 style={{ textAlign: "center" }}> &copy; Harut Sargsyan | 2022</h4>
   </footer>
 );
 

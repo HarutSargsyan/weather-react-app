@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import weather from "../api/weather";
 import imageAPI from "../api/image";
 import noImage from "../icons/no-image.jpeg";
@@ -32,6 +32,10 @@ export default () => (): Result => {
   const [image, setImage] = useState("");
   const [isError, setIsError] = useState(false);
 
+  useEffect(() => {
+    if(isLoading) setIsLoading(false);
+  },[image])
+
   const fetchWeather = async ({ cityName }: { cityName: string }) => {
     setIsLoading(true);
     try {
@@ -44,9 +48,9 @@ export default () => (): Result => {
       image && setImage(image?.largeImageURL);
       setResponse(data);
     } catch (err) {
-      setIsError(true);
-    } finally {
       setIsLoading(false);
+      setImage(noImage);
+      setIsError(true);
     }
   };
 

@@ -1,8 +1,7 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import useDetailFields from "../hooks/useDetailFields";
 import { View, Return } from "../util/index";
-
 
 const ResultsWrepper = styled.div`
   display: flex;
@@ -18,7 +17,7 @@ const ResultWrapper = styled.div`
 const Card = styled.div`
   position: relative;
   width: 20rem;
-  min-height: 23rem;
+  min-height: ${(props) => props.isError ? "10rem" : "23rem"};
   background-color: white;
   border-radius: 12px;
   padding: 5px;
@@ -36,17 +35,40 @@ const Image = styled.img`
   max-width: 100%;
   max-height: 100%;
   border-radius: 6px;
-  filter: ${({ isLoading }: { isLoading: boolean }) =>
-    isLoading ? "blur(5px)" : ""};
+`;
+
+const lazyLoadAnimation = keyframes`
+  0% {
+    opacity: 100%;
+  }
+
+  20%{
+    opacity: 50%;
+  }
+
+  100%{
+    opacity:100%;
+  }
+`;
+
+const LazyLoader = styled.div`
+  width: ${({ width }:{width:string}) => width};
+  height: ${({height}:{height: string}) => height};
+  background-color: grey;
+  margin-bottom: 30px;
+  opacity: 0;
+  animation: 0.5s ${lazyLoadAnimation} linear infinite;
+  border-radius: 8px;
 `;
 
 interface Props<T> {
   isLoading: boolean;
   result: T;
   imageUrl: string | undefined;
+  isError: boolean;
 }
 
-const Result = ({ isLoading, result, imageUrl }: Props<View>) => {
+const Result = ({ isLoading, result, imageUrl, isError }: Props<View>) => {
   const details = useDetailFields(result);
   if (!result)
     return (
@@ -55,28 +77,41 @@ const Result = ({ isLoading, result, imageUrl }: Props<View>) => {
       </p>
     );
   return (
-    <Card>
-      <div>
-        <Image isLoading={isLoading} src={imageUrl} />
-      </div>
-      <div style={{ padding: "10px", marginBottom: "20px" }}>
-        <h3 style={{ fontSize: "2.5rem", marginBottom: "10px" }}>
-          {result?.name}
-        </h3>
-        <hr />
-      </div>
-      <ResultsWrepper>
-        {details.map(({Icon, sign, key, text}: Return) => (
-          <ResultWrapper key={key}>
-            <IconWrapper>
-              <Icon />
-            </IconWrapper>
-            <p style={{ fontSize: "1.3rem", color: "grey" }}>
-              {text} {sign}
-            </p>
-          </ResultWrapper>
+    <Card isError={isError}>
+      {isLoading ? (
+        <LazyLoader width="20rem" height="10rem" />
+      ) : (
+        <div>
+          <Image src={imageUrl} />
+        </div>
+      )}
+
+      {!isError &&
+        (isLoading ? (
+          <LazyLoader width="20rem" height="3rem" />
+        ) : (
+          <div style={{ padding: "10px", marginBottom: "20px" }}>
+            <h3 style={{ fontSize: "2.5rem", marginBottom: "10px" }}>
+              {result?.name}
+            </h3>
+            <hr />
+          </div>
         ))}
-      </ResultsWrepper>
+      {!isError && (
+        isLoading ? <LazyLoader width="20rem" height="5rem" /> :
+        <ResultsWrepper>
+          {details.map(({ Icon, sign, key, text }: Return) => (
+            <ResultWrapper key={key}>
+              <IconWrapper>
+                <Icon />
+              </IconWrapper>
+              <p style={{ fontSize: "1.3rem", color: "grey" }}>
+                {text} {sign}
+              </p>
+            </ResultWrapper>
+          ))}
+        </ResultsWrepper>
+      )}
     </Card>
   );
 };

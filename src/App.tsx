@@ -29,6 +29,7 @@ export default () => {
       <ViewWrapper>
         <SearchBar isError={isError} onTermSubmit={onCitySubmit} />
         <Result
+          isError = {isError}
           isLoading={isLoading}
           result={response ? response : defaultResponse}
           imageUrl={image ? image : defaultImage}
